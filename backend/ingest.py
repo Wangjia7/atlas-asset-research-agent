@@ -2,6 +2,7 @@ import hashlib
 import json
 from .db import dump, insert, now, rows
 from .providers import RuleExtractor, embedding
+from .briefing import annotate, is_briefing
 
 
 def ingest(conn, title, raw_text, publisher='Manual', url='', published_at=None, is_demo=False, known_at=None, asset_ids=None):
@@ -14,7 +15,7 @@ def ingest(conn, title, raw_text, publisher='Manual', url='', published_at=None,
     source_id = insert(conn, 'raw_sources', title=title, publisher=publisher, url=url,
                        published_at=published, known_at=known, raw_text=raw_text, content_hash=digest,
                        embedding=dump(embedding(raw_text)), embedding_model='char-hash-64-v1 (non-semantic)',
-                       metadata=dump({'asset_ids':asset_ids or [],'encoding':'unicode','extraction':'offline candidate claims','surprise_basis':None}), is_demo=int(is_demo))
+                       metadata=dump({'asset_ids':asset_ids or [],'encoding':'unicode','extraction':'offline candidate claims','surprise_basis':None,'briefing':annotate(raw_text) if is_briefing(raw_text) else None}), is_demo=int(is_demo))
     previous = {r['text'] for r in rows(conn, 'SELECT c.text FROM claims c JOIN raw_sources s ON s.id=c.source_id WHERE s.is_demo=?', (int(is_demo),))}
     candidates = RuleExtractor().extract(raw_text)
     for claim in candidates:

@@ -49,7 +49,7 @@ RULES = [
 
 
 class RuleExtractor:
-    version = 'offline-rules-v1.1'
+    version = 'offline-rules-v1.2'
 
     def extract(self, text):
         result = []
@@ -66,9 +66,9 @@ class RuleExtractor:
             conditional = bool(re.search(r'如果|若|一旦|if\b', low))
             possible = bool(re.search(r'可能|预计|预测|预期|may\b|could\b|expect', low))
             proposal = bool(re.search(r'提议|讨论|拟|proposal|proposed|consider', low))
-            rumor = bool(re.search(r'传闻|未经证实|rumou?r', low))
-            mechanism = bool(re.search(r'导致|从而|意味着|机制|because', low))
-            claim_type = 'forecast' if possible or conditional else 'inference' if mechanism else 'observation'
+            rumor = bool(re.search(r'传闻|未经证实|未.{0,5}确认|尚无最终|尚不清楚|rumou?r', low))
+            mechanism = bool(re.search(r'影响判断|历史类比|导致|从而|意味着|机制|because|→|\\rightarrow', low))
+            claim_type = 'validation_condition' if '下一验证点' in sentence else 'forecast' if possible or conditional else 'inference' if mechanism else 'observation'
             status = 'unverified' if rumor else 'proposed' if proposal else 'reported'
             modality = 'conditional' if conditional else 'possible' if possible or proposal or rumor else 'asserted'
             matches, tags = [], set()
