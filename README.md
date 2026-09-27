@@ -1,2 +1,2 @@
 # atlas-asset-research-agent
-Local research lab
+A local-first investment research agent for lossless news extraction, event-factor-asset modeling, model arenas, prediction ledgers, and portfolio analysis.
