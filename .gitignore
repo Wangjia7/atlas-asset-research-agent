@@ -3,3 +3,9 @@ __pycache__/
 .pytest_cache/
 data/
 *.log
+research/**/*.sqlite3
+
+research/**/predictions.csv
+research/**/claims.csv
+research/**/event_factor.csv
+research/**/results.json

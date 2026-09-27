@@ -93,6 +93,7 @@ async def integrity_error(request, exc):
 
 
 class SourceInput(BaseModel):
+    asset_ids: list[str]=Field(default_factory=list,max_length=100)
     title: str=Field(min_length=1,max_length=300)
     raw_text: str=Field(min_length=1,max_length=200000)
     publisher: str=Field(default='Manual',max_length=200)
@@ -149,6 +150,16 @@ def home(): return FileResponse(ROOT/'static'/'index.html')
 
 @app.get('/api/health')
 def health(): return {'ok':True,'schema_version':1,'execution':False}
+
+
+@app.get('/api/readiness')
+def readiness(asset:str='Gold',horizon:Literal['1W','1M','3M']='1W',regime:Literal['Neutral','Risk-off','Inflation']='Neutral',model:str='linear'):
+    from .readiness import assess
+    with connect() as conn:
+        m=conn.execute('SELECT * FROM models WHERE id=?',(model,)).fetchone()
+        if not m or not conn.execute('SELECT id FROM assets WHERE id=?',(asset,)).fetchone():
+            raise HTTPException(404,'资产或模型不存在')
+        return assess(conn,asset,horizon,regime,m,now())
 
 
 @app.get('/api/catalog')

@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from statistics import mean
 from .db import dump, insert, now, rows
 from .metrics import metrics, score
+from .readiness import assess
 
 HORIZONS = {'1W':7,'1M':30,'3M':90}
 REGIMES = ['Neutral','Risk-off','Inflation']
@@ -112,7 +113,9 @@ def run_agent(conn, mode='active', regime='Neutral', at=None, is_demo=False, cre
     evidence={}
     for h in HORIZONS:
         values[h],evidence[h]=factor_values(conn,at,h,regime,is_demo)
-    snapshot={'factors':factors,'values':values,'evidence':evidence,'overrides':overrides,
+    readiness={} if is_demo else {f"{a['id']}:{h}:{m['id']}":assess(conn,a['id'],h,regime,m,at)
+                                  for a in assets for h in HORIZONS for m in models}
+    snapshot={'readiness':readiness,'factors':factors,'values':values,'evidence':evidence,'overrides':overrides,
               'models':models,'assignments':[{ 'asset':k[0],'horizon':k[1],'model':k[2],'role':v} for k,v in assignments.items()],
               'formula':'sum(tanh(decayed event impacts) * model weight * horizon scale)',
               'cohort':cohort,'target_units':{a['id']:a['target_unit'] for a in assets}}
@@ -171,11 +174,11 @@ def run_agent(conn, mode='active', regime='Neutral', at=None, is_demo=False, cre
     for pred in planned:
         insert(conn,'predictions',run_id=run_id,**pred)
     if create_portfolios:
-        portfolios(conn,run_id,planned)
+        portfolios(conn,run_id,planned,readiness if not is_demo else None)
     return {'run_id':run_id,'mode':mode,'prediction_count':len(planned),'model_ids':sorted({p['model_id'] for p in planned}), 'cohort':cohort}
 
 
-def portfolios(conn,run_id,predictions):
+def portfolios(conn,run_id,predictions,readiness=None):
     # Unit-consistent investable subset: DXY and US10Y are indicators, not holdings.
     eligible=[a['id'] for a in rows(conn,"SELECT id FROM assets WHERE asset_class!='indicator'")]
     signals={a:mean([p['adjusted'] for p in predictions if p['asset_id']==a and p['horizon']=='1M'] or [0]) for a in eligible}
@@ -188,6 +191,10 @@ def portfolios(conn,run_id,predictions):
             total=sum(scores.values())
             weights={a:min(.15,.8*s/total) if total>0 else 0 for a,s in scores.items()}
             weights['CASH']=1-sum(weights.values())
+        research_weights=dict(weights)
+        if readiness is not None:
+            weights={'CASH':1.0}
         insert(conn,'portfolio_snapshots',run_id=run_id,portfolio_model_id=model['id'],weights=dump(weights),
-               details=dump({'method':model['method'],'signals':signals,'currency_policy':'demo normalized signals; no FX hedge',
+               details=dump({'research_weights':research_weights,'data_gate':'blocked' if readiness is not None else 'demo',
+                             'method':model['method'],'signals':signals,'currency_policy':'demo normalized signals; no FX hedge',
                              'execution':False,'note':'示范研究权重；未估计协方差、成本、可交易性及跨境约束'}))

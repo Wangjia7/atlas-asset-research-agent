@@ -1,0 +1,202 @@
+{
+  "period": {
+    "label": "2026-09-21/2026-09-25",
+    "decision_at": "2026-09-21T00:00:00.000000+00:00",
+    "reviewed_at": "2026-09-27",
+    "kind": "retrospective diagnostic; not a point-in-time validated backtest"
+  },
+  "news": [
+    {
+      "title": "Saudi pipeline repairs / short source excerpt",
+      "publisher": "Y'all Street ETFs",
+      "url": "https://www.yallstreetetfs.com/news-resources/gold-price-holds-near-4380-after-fed-rate-hike/",
+      "published_at": "2026-09-18T23:59:59.000000+00:00",
+      "known_at": "2026-09-19T23:59:59.000000+00:00",
+      "raw_text": "WTI crude eased toward $101 as Saudi pipeline repairs continued to unwind last week’s supply scare.",
+      "scope": "exact excerpt only; full article not archived; date-only publication conservatively delayed; retrieved 2026-09-27; historic revision unknown",
+      "asset_ids": [
+        "Oil",
+        "601975"
+      ]
+    },
+    {
+      "title": "6月中旬生产资料价格",
+      "publisher": "国家统计局",
+      "url": "https://linzhi.gov.cn/zfxxgkpt/c105932/202606/c7ed761bd923454e9ad1ec158d1a7de1.shtml",
+      "published_at": "2026-06-24T23:59:59.000000+00:00",
+      "known_at": "2026-06-25T23:59:59.000000+00:00",
+      "raw_text": "2026年6月中旬与6月上旬相比，15种产品价格上涨，32种下降，3种持平。",
+      "asset_ids": [
+        "601975",
+        "603019",
+        "000651",
+        "600887",
+        "002273",
+        "603629",
+        "002847",
+        "518880",
+        "601899",
+        "600690"
+      ],
+      "scope": "short excerpt, not full archive; macro relevance is an analyst assumption; retrieved 2026-09-27; publication date assumed conservatively; historical revision unverified"
+    },
+    {
+      "title": "上半年经济数据",
+      "publisher": "国家统计局",
+      "url": "https://www.stats.gov.cn/xxgk/sjfb/zxfb2020/202607/t20260715_1964121.html",
+      "published_at": "2026-07-15T23:59:59.000000+00:00",
+      "known_at": "2026-07-16T23:59:59.000000+00:00",
+      "raw_text": "6月份，进出口总额47823亿元，同比增长24.2%，比上月加快7.3个百分点。",
+      "asset_ids": [
+        "601975",
+        "603019",
+        "000651",
+        "600887",
+        "002273",
+        "603629",
+        "002847",
+        "518880",
+        "601899",
+        "600690"
+      ],
+      "scope": "short excerpt, not full archive; macro relevance is an analyst assumption; retrieved 2026-09-27; publication date assumed conservatively; historical revision unverified"
+    },
+    {
+      "title": "7月经济数据解读",
+      "publisher": "国家统计局",
+      "url": "https://www.stats.gov.cn/zwfwck/sjfb/202608/t20260817_1965064.html",
+      "published_at": "2026-08-17T23:59:59.000000+00:00",
+      "known_at": "2026-08-18T23:59:59.000000+00:00",
+      "raw_text": "7月份，扣除能源的工业消费品价格同比上涨1.5%，其中黄金饰品、个人护理用品价格分别上涨24.6%和1.7%。",
+      "asset_ids": [
+        "601975",
+        "603019",
+        "000651",
+        "600887",
+        "002273",
+        "603629",
+        "002847",
+        "518880",
+        "601899",
+        "600690"
+      ],
+      "scope": "short excerpt, not full archive; macro relevance is an analyst assumption; retrieved 2026-09-27; publication date assumed conservatively; historical revision unverified"
+    },
+    {
+      "title": "8月经济数据解读",
+      "publisher": "国家统计局",
+      "url": "https://www.stats.gov.cn/sj/zxfbhjd/202609/t20260915_1965332.html",
+      "published_at": "2026-09-15T23:59:59.000000+00:00",
+      "known_at": "2026-09-16T23:59:59.000000+00:00",
+      "raw_text": "1—8月份规模以上工业增加值、服务业生产指数同比分别增长5.3%、4.7%。",
+      "asset_ids": [
+        "601975",
+        "603019",
+        "000651",
+        "600887",
+        "002273",
+        "603629",
+        "002847",
+        "518880",
+        "601899",
+        "600690"
+      ],
+      "scope": "short excerpt, not full archive; macro relevance is an analyst assumption; retrieved 2026-09-27; publication date assumed conservatively; historical revision unverified"
+    }
+  ],
+  "observations": [
+    {
+      "asset": "SPX",
+      "kind": "index_reference",
+      "currency": "USD",
+      "entry": 7692.83,
+      "entry_date": "2026-09-21",
+      "exit": 7743.41,
+      "exit_date": "2026-09-25",
+      "prior_close": 7650.5,
+      "url": "https://www.investing.com/indices/us-spx-500-historical-data?cid=40826",
+      "notes": "Index open/close reference only, not an executable fund price."
+    },
+    {
+      "asset": "002273",
+      "kind": "equity_ohlc",
+      "currency": "CNY",
+      "entry": 25.6,
+      "entry_date": "2026-09-21",
+      "exit": 25.17,
+      "exit_date": "2026-09-24",
+      "prior_close": 25.47,
+      "closes": [
+        25.61,
+        25.85,
+        26.19,
+        25.17
+      ],
+      "url": "https://cn.investing.com/equities/crystal-optech-a-historical-data",
+      "notes": "Unadjusted prices, corporate-action verification incomplete; provisional paper fills."
+    },
+    {
+      "asset": "601975",
+      "kind": "weekly_reference",
+      "currency": "CNY",
+      "entry": null,
+      "prior_close": 4.64,
+      "exit": 4.47,
+      "exit_date": "2026-09-24",
+      "url": "https://wap.stockstar.com/detail/RB2026092500009226",
+      "notes": "Friday-to-Thursday reference return, not Monday entry."
+    },
+    {
+      "asset": "600887",
+      "kind": "weekly_reference",
+      "currency": "CNY",
+      "entry": null,
+      "prior_close": 26.6,
+      "exit": 26.9,
+      "exit_date": "2026-09-24",
+      "url": "https://wap.stockstar.com/detail/RB2026092500008644",
+      "notes": "Friday-to-Thursday reference return, not Monday entry."
+    },
+    {
+      "asset": "518880",
+      "kind": "nav_reference",
+      "currency": "CNY",
+      "entry": null,
+      "prior_close": 9.0081,
+      "exit": 8.8065,
+      "exit_date": "2026-09-24",
+      "url": "https://fund.stockstar.com/funds/f10/fundjz_518880.html",
+      "notes": "NAV only. Cannot be used as ETF execution price."
+    }
+  ],
+  "exclusions": {
+    "600690": "conflicting close reports; excluded",
+    "601899": "missing matched open/close",
+    "603019": "missing matched open/close",
+    "603629": "weekly percentage only, missing execution series",
+    "Gold": "spot/futures instrument not fixed; no matched execution series",
+    "Oil": "WTI sources disagree on contract/settlement; excluded",
+    "DXY": "indicator; no matched series",
+    "US10Y": "yield indicator in bp; no matched series",
+    "BTC": "no matched timestamped series",
+    "000651": "weekly percentage only, missing execution series",
+    "002847": "missing matched open/close"
+  },
+  "calendar_url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/c/c_20251222_10802510.shtml",
+  "source_conflicts": [
+    {
+      "asset": "Oil",
+      "date": "2026-09-18",
+      "values": [
+        95.37,
+        100.3
+      ],
+      "urls": [
+        "https://stockmarketwatch.com/digest/2026-09-18",
+        "https://www.seeerai.com/daily/2026-09-19/"
+      ],
+      "decision": "reject: no consistent contract specification"
+    }
+  ],
+  "lookback_required_start": "2026-06-21"
+}
