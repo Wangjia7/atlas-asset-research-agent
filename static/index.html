@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ATLAS · 多维资产研究</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<aside class="sidebar">
+ <a class="brand" href="#dashboard"><span class="brand-icon">✳</span><span>ATLAS<small>LOCAL RESEARCH LAB</small></span></a>
+ <div class="nav-label">研究工作台</div>
+ <nav id="navigation"></nav>
+ <div class="sidebar-foot"><span class="status-dot"></span> 本地 SQLite <small>证据 → 因子 → 模型 → 验证<br>Research only · v0.1</small></div>
+</aside>
+<div class="workspace">
+ <header><div class="breadcrumb">研究系统 <span>/</span> <b id="crumb">Dashboard</b></div><div class="top-controls"><label>数据集 <select id="cohort"><option value="demo">合成演示</option><option value="live">真实研究</option></select></label><span class="local-tag">● LOCAL</span></div></header>
+ <main>
+  <div class="page-top"><div><div class="eyebrow">MULTIDIMENSIONAL INTELLIGENCE</div><h1 id="page-title">研究总览</h1><p id="page-subtitle">保留证据，观察变化，让每一次判断可回溯。</p></div><div class="actions"><button id="full-run" class="button secondary">全量复评</button><button id="active-run" class="button primary">↗ 运行 Active Set</button></div></div>
+  <div class="filterbar"><label>研究资产<select id="asset-filter"></select></label><label>预测期限<select id="horizon-filter"></select></label><label>市场状态<select id="regime-filter"></select></label><div class="filter-note" id="dataset-note">DEMO / 合成数据用于验证流程</div></div>
+  <div id="content" aria-live="polite"><div class="empty">正在读取本地研究库…</div></div>
+  <footer>ATLAS RESEARCH LAB <span>Store losslessly. Structure richly. Project selectively.</span></footer>
+ </main>
+</div>
+<div id="toast" role="status"></div>
+<dialog id="detail-dialog"><div class="dialog-head"><h2 id="dialog-title">详情</h2><button id="close-dialog" aria-label="关闭">✕</button></div><div id="dialog-content"></div></dialog>
+<script src="/static/app.js" defer></script>
+</body></html>
